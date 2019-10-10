@@ -1,5 +1,24 @@
-function compte_a_rebours()
-{
+$(document).ready(function () {
+    var header = $('body');
+
+    var backgrounds = new Array(
+        'url(drapeau-royaume-uni.jpg)', 'url(drapeau-etats-unis.jpg)'
+    );
+
+    var current = 0;
+
+    function nextBackground() {
+        current++;
+        current = current % backgrounds.length;
+        header.css('background-image', backgrounds[current]);
+    }
+    setInterval(nextBackground, 3000);
+
+    header.css('background-image', backgrounds[0]);
+});
+
+
+function compte_a_rebours() {
     var compte_a_rebours = document.getElementById("compte_a_rebours");
 
     var date_actuelle = new Date();
@@ -7,14 +26,12 @@ function compte_a_rebours()
     var total_secondes = (date_evenement - date_actuelle) / 1000;
 
     var prefixe = "";
-    if (total_secondes < 0)
-    {
+    if (total_secondes < 0) {
         prefixe = "Compte à rebours terminé il y a ";
         total_secondes = Math.abs(total_secondes);
     }
 
-    if (total_secondes > 0)
-    {
+    if (total_secondes > 0) {
         var jours = Math.floor(total_secondes / (60 * 60 * 24));
         var heures = Math.floor((total_secondes - (jours * 60 * 60 * 24)) / (60 * 60));
         minutes = Math.floor((total_secondes - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
@@ -26,56 +43,41 @@ function compte_a_rebours()
         var mot_minute = "minutes,";
         var mot_seconde = "secondes";
 
-        if (jours == 0)
-        {
+        if (jours == 0) {
             jours = '';
             mot_jour = '';
-        }
-        else if (jours == 1)
-        {
+        } else if (jours == 1) {
             mot_jour = "jour,";
         }
 
-        if (heures == 0)
-        {
+        if (heures == 0) {
             heures = '';
             mot_heure = '';
-        }
-        else if (heures == 1)
-        {
+        } else if (heures == 1) {
             mot_heure = "heure,";
         }
 
-        if (minutes == 0)
-        {
+        if (minutes == 0) {
             minutes = '';
             mot_minute = '';
-        }
-        else if (minutes == 1)
-        {
+        } else if (minutes == 1) {
             mot_minute = "minute,";
         }
 
-        if (secondes == 0)
-        {
+        if (secondes == 0) {
             secondes = '';
             mot_seconde = '';
             et = '';
-        }
-        else if (secondes == 1)
-        {
+        } else if (secondes == 1) {
             mot_seconde = "seconde";
         }
 
-        if (minutes == 0 && heures == 0 && jours == 0)
-        {
+        if (minutes == 0 && heures == 0 && jours == 0) {
             et = "";
         }
 
         compte_a_rebours.innerHTML = prefixe + jours + ' ' + mot_jour + ' ' + heures + ' ' + mot_heure + ' ' + minutes + ' ' + mot_minute + ' ' + et + ' ' + secondes + ' ' + mot_seconde;
-    }
-    else
-    {
+    } else {
         compte_a_rebours.innerHTML = 'Compte à rebours terminé.';
     }
 
